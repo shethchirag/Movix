@@ -3,13 +3,15 @@ import "./style.scss";
 import { useNavigate } from "react-router-dom";
 import useFetch from "../../../hooks/useFetch";
 import { useSelector } from "react-redux";
+import ContentWrapper from "./../../../components/contentWrapper/ContentWrapper";
+import ImgLazy from "./../../../components/lazyLoadImage/img";
 
 function HeroBanner() {
   const imgDefaultUrl = useSelector((state) => {
     return state.home.url;
   });
   console.log("🚀 ~ imgDefaultUrl ~ imgDefaultUrl:", imgDefaultUrl.backdrop);
-  const [backgroud, setBackground] = useState("");
+  const [background, setBackground] = useState("");
   const [query, setQuery] = useState("");
   const navigate = useNavigate();
   const { data, loading } = useFetch("/movie/upcoming");
@@ -28,7 +30,13 @@ function HeroBanner() {
   };
   return (
     <div className="heroBanner">
-      <div className="wrapper">
+      {!loading && (
+        <div className="backdrop-img">
+          <ImgLazy alt="bg" src={background} />
+        </div>
+      )}
+      <div className="opacity-layer"></div>
+      <ContentWrapper>
         <div className="heroBannerContent">
           <span className="title">Welcome.</span>
           <span className="subTitle">
@@ -43,9 +51,10 @@ function HeroBanner() {
                 setQuery(e.target.value);
               }}
             />
+            <button>Search</button>
           </div>
         </div>
-      </div>
+      </ContentWrapper>
     </div>
   );
 }
