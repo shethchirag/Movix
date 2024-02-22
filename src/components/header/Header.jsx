@@ -45,30 +45,26 @@ function Header() {
     setMobileMenu(false);
   };
 
-  const controlNavbar = () => {
-    console.log(window.scrollY);
-    if (window.scrollY > 200) {
-      console.log(window.scrollY);
-      if (window.scrollY > lastScrollY && !mobileMenu) {
-        setShow("hide");
-        console.log("hide");
-      } else {
-        setShow("show");
-        console.log("show");
-      }
-      setLastScrollY(window.scrollY);
-    } else {
-      setShow("top");
-      console.log("top");
-    }
-  };
-
   useEffect(() => {
+    const controlNavbar = () => {
+      if (window.scrollY > 200) {
+        if (window.scrollY > lastScrollY && !mobileMenu) {
+          setShow("hide");
+        } else {
+          setShow("show");
+        }
+        setLastScrollY(window.scrollY);
+      } else {
+        setShow("top");
+      }
+    };
+
     window.addEventListener("scroll", controlNavbar);
+
     return () => {
       window.removeEventListener("scroll", controlNavbar);
     };
-  }, [lastScrollY]);
+  }, [lastScrollY, mobileMenu]);
 
   return (
     <header className={`header ${mobileMenu ? "mobileView" : ""} ${show}`}>
@@ -106,7 +102,7 @@ function Header() {
               }}
             />
           ) : (
-            <SlMenu on onClick={openMobileView} />
+            <SlMenu onClick={openMobileView} />
           )}
         </div>
       </ContentWrapper>
