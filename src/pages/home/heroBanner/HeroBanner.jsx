@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import "./style.scss";
 import { useNavigate } from "react-router-dom";
 import useFetch from "../../../hooks/useFetch";
@@ -10,7 +10,6 @@ function HeroBanner() {
   const imgDefaultUrl = useSelector((state) => {
     return state.home.url;
   });
-  console.log("🚀 ~ imgDefaultUrl ~ imgDefaultUrl:", imgDefaultUrl.backdrop);
   const [background, setBackground] = useState("");
   const [query, setQuery] = useState("");
   const navigate = useNavigate();
