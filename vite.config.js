@@ -5,7 +5,7 @@ import react from "@vitejs/plugin-react";
 export default defineConfig({
   server: {
     proxy: {
-      "https://api.themoviedb.org/3": "http://localhost",
+      "https://movix-brown-seven.vercel.app/": "http://localhost",
     },
   },
   plugins: [react()],
