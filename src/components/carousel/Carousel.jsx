@@ -13,7 +13,7 @@ import dayjs from "dayjs";
 import CircleRating from "../circleRating/CircleRating";
 import Genres from "../genres/Genres";
 
-function Carousel({ data, loading }) {
+function Carousel({ data, loading, endPoint }) {
   const carouselContainer = useRef();
   const { url } = useSelector((state) => state.home);
   const navigate = useNavigate();
@@ -64,7 +64,7 @@ function Carousel({ data, loading }) {
               return (
                 <div
                   onClick={() => {
-                    navigate(`${item.media_type}/${item.id}`);
+                    navigate(`${item.media_type || endPoint}/${item.id}`);
                   }}
                   key={item.id}
                   className="carouselItem"
