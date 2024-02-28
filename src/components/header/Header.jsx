@@ -27,7 +27,6 @@ function Header() {
 
   const searchQueryHandler = (event) => {
     if (event.key === "Enter" && query.length > 0) {
-      console.log(event);
       navigate(`/search/${query}`);
       setTimeout(() => {
         setShowSearch(false);
